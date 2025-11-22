@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adarsh Patel | Software Developer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="tailwind.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="fonts.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="all.min.css">
+
+    <!-- DevIcons -->
+    <link rel="stylesheet" type='text/css' href="devicon.min.css" />
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enabling manual dark mode
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        accent: '#000000', 
+                        primary: '#171717',
+                        secondary: '#525252',
+                        bg: '#ffffff',
+                        surface: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- BASE VARIABLES --- */
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #171717;
+            --text-sec: #525252;
+            --accent: #000000;
+            --card-bg: #ffffff;
+            --card-border: #000000;
+            --card-shadow: #000000;
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --grid-dot: #e5e7eb;
+            --line-color: #e5e5e5;
+            --toggle-bg: #000000;
+            --toggle-icon: #ffffff;
+            --toggle-shadow: rgba(0,0,0,0.3);
+        }
+
+        /* --- DARK MODE VARIABLES --- */
+        body.dark-mode {
+            --bg-color: #0a0a0a;
+            --text-main: #ffffff;
+            --text-sec: #a3a3a3;
+            --accent: #ffffff;
+            --card-bg: #171717;
+            --card-border: #ffffff;
+            --card-shadow: #ffffff;
+            --nav-bg: rgba(10, 10, 10, 0.9);
+            --grid-dot: #262626;
+            --line-color: #333333;
+            --toggle-bg: #ffffff;
+            --toggle-icon: #000000;
+            --toggle-shadow: rgba(255,255,255,0.3);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            cursor: none;
+            background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+            background-size: 30px 30px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* --- DARK MODE OVERRIDES --- */
+        body.dark-mode nav {
+            background-color: var(--nav-bg);
+            border-color: #333;
+        }
+
+        body.dark-mode .text-black { color: #ffffff !important; }
+        body.dark-mode .text-secondary { color: #a3a3a3 !important; }
+        body.dark-mode .border-black { border-color: #ffffff !important; }
+        body.dark-mode .bg-black { background-color: #ffffff !important; color: #000000 !important; }
+        body.dark-mode .bg-white { background-color: #000000 !important; color: #ffffff !important; border-color: #ffffff !important; }
+        body.dark-mode .bg-gray-100 { background-color: #262626 !important; color: #ffffff !important; }
+        body.dark-mode .border-gray-100 { border-color: #333 !important; }
+        body.dark-mode .border-gray-200 { border-color: #333 !important; }
+        
+        /* Specific fix for the "Get In Touch" button hover in dark mode */
+        body.dark-mode .contact-btn:hover {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--text-sec); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-main); }
+
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%; z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot {
+            width: 8px; height: 8px;
+            background-color: var(--accent);
+            transition: background-color 0.3s;
+        }
+        .cursor-outline {
+            width: 40px; height: 40px;
+            border: 1px solid var(--accent); /* Dynamic color */
+            transition: width 0.2s, height 0.2s, border-color 0.3s;
+            opacity: 0.5;
+        }
+        
+        /* Utilities */
+        .section-heading { display: flex; align-items: center; white-space: nowrap; }
+        .section-heading::after {
+            content: ""; display: block; width: 300px; height: 1px;
+            background-color: var(--line-color);
+            margin-left: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        @media (max-width: 768px) {
+            .section-heading::after { width: 100%; }
+            .cursor-dot, .cursor-outline { display: none; }
+            body { cursor: auto; }
+        }
+
+        /* --- CARD STYLES (Dynamic) --- */
+        .glass-card {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            box-shadow: 6px 6px 0px 0px var(--card-shadow);
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .glass-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 10px 10px 0px 0px var(--card-shadow);
+            border-color: var(--card-border);
+        }
+        
+        /* Dark mode specific text adjustment for cards */
+        body.dark-mode .glass-card p { color: #d4d4d4 !important; }
+        body.dark-mode .glass-card ul li { color: #ffffff !important; }
+
+        .skill-icon { transition: transform 0.3s ease; }
+        .skill-icon:hover { transform: translateY(-5px); }
+        
+        /* Toggle Button Animation */
+        .theme-toggle-btn {
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background-color: var(--toggle-bg);
+            color: var(--toggle-icon);
+            box-shadow: 4px 4px 0px 0px var(--toggle-shadow);
+            border: 2px solid var(--accent);
+        }
+        .theme-toggle-btn:active { transform: scale(0.9); }
+        .theme-toggle-btn i { transition: transform 0.5s; }
+        .theme-toggle-btn:hover i { transform: rotate(45deg); }
+        .theme-toggle-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px var(--toggle-shadow);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-black font-display font-bold text-2xl tracking-wider nav-item z-50">AP.</a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="nav-link text-sm font-medium text-secondary hover:text-black transition-colors"><span class="font-bold text-black">01.</span> Experience</a>
+                <a href="#projects" class="nav-link text-sm font-medium text-secondary hover:text-black transition-colors"><span class="font-bold text-black">02.</span> Projects</a>
+                <a href="#skills" class="nav-link text-sm font-medium text-secondary hover:text-black transition-colors"><span class="font-bold text-black">03.</span> Skills</a>
+                <a href="resume.pdf" download class="px-5 py-2 border border-black text-black text-sm font-medium rounded-none hover:bg-black hover:text-white transition-all nav-item contact-btn">Resume</a>
+            </div>
+
+            <!-- Mobile Controls -->
+            <div class="flex items-center space-x-4 md:hidden z-50">
+                <button class="text-black nav-item" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 absolute w-full top-full left-0 shadow-lg">
+            <div class="flex flex-col p-6 space-y-6 bg-inherit">
+                <a href="#about" class="text-sm text-secondary hover:text-black font-medium" onclick="toggleMobileMenu()">Experience</a>
+                <a href="#projects" class="text-sm text-secondary hover:text-black font-medium" onclick="toggleMobileMenu()">Projects</a>
+                <a href="#skills" class="text-sm text-secondary hover:text-black font-medium" onclick="toggleMobileMenu()">Skills</a>
+                <a href="resume.pdf" download class="text-sm text-secondary hover:text-black font-medium" onclick="toggleMobileMenu()">Resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center container mx-auto px-6 pt-20">
+        <p class="text-secondary font-display mb-5 hero-el tracking-widest uppercase text-sm font-bold">Hi, my name is</p>
+        <h1 class="text-6xl md:text-8xl font-bold text-black mb-4 hero-el font-display tracking-tighter">Adarsh Patel.</h1>
+        <h2 class="text-4xl md:text-6xl font-bold text-secondary mb-8 hero-el font-display tracking-tight">I build things for the web.</h2>
+        <p class="max-w-xl text-lg text-secondary mb-12 hero-el leading-relaxed">
+            I am a Software Engineer specializing in building exceptional digital experiences. Currently, I'm focused on building accessible, human-centered products at <span class="text-black font-bold border-b-2 border-black">Silver Touch Technologies</span>.
+        </p>
+        <div class="hero-el flex flex-wrap gap-5">
+            <a href="#projects" class="px-8 py-4 bg-black text-white font-display font-medium rounded-none hover:bg-gray-800 transition-colors inline-block shadow-lg contact-btn text-center">Check out my work</a>
+            <a href="resume.pdf" download class="px-8 py-4 border-2 border-black text-black font-display font-medium rounded-none hover:bg-black hover:text-white transition-colors inline-block shadow-lg contact-btn text-center">Download Resume</a>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="about" class="py-24 container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-black mb-12 section-heading font-display"><span class="text-secondary text-2xl mr-2 font-light">01.</span> Experience</h2>
+        
+        <div class="flex flex-col md:flex-row gap-10 max-w-5xl mx-auto">
+            <!-- Timeline Bar -->
+            <div class="md:w-1/3 border-l-2 border-gray-200 pl-6 md:pl-0 md:border-l-0 md:border-l-2 border-black relative experience-trigger">
+                <div class="absolute -left-[9px] top-0 w-4 h-4 bg-black rounded-full hidden md:block shadow-lg border-black border"></div>
+                <div class="pl-6">
+                    <h4 class="text-2xl text-black font-bold font-display">Silver Touch</h4>
+                    <p class="text-sm text-secondary font-medium mt-1">Jan 2024 - Present</p>
+                    <p class="text-xs text-gray-400 mt-2 uppercase tracking-wide">Ahmedabad, Gujarat</p>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="md:w-2/3 experience-content">
+                <h3 class="text-2xl text-black font-bold mb-2">Software Engineer</h3>
+                <div class="flex gap-2 mb-6">
+                    <span class="px-2 py-1 bg-gray-100 text-xs font-mono rounded text-black">.NET MVC</span>
+                    <span class="px-2 py-1 bg-gray-100 text-xs font-mono rounded text-black">SAP B1</span>
+                    <span class="px-2 py-1 bg-gray-100 text-xs font-mono rounded text-black">SQL</span>
+                </div>
+                
+                <ul class="space-y-4 list-none text-secondary leading-relaxed">
+                    <li class="relative pl-6">
+                        <span class="absolute left-0 text-black font-bold">▹</span>
+                        Developed and maintained .NET MVC applications integrated with SAP Business One for sales and inventory optimization.
+                    </li>
+                    <li class="relative pl-6">
+                        <span class="absolute left-0 text-black font-bold">▹</span>
+                        Enhanced application performance by optimizing SQL and SAP HANA queries.
+                    </li>
+                    <li class="relative pl-6">
+                        <span class="absolute left-0 text-black font-bold">▹</span>
+                        Implemented server-side pagination and dynamic UIs using jQuery, Bootstrap, and Data-Tables for better user experience.
+                    </li>
+                    <li class="relative pl-6">
+                        <span class="absolute left-0 text-black font-bold">▹</span>
+                        Led technical support for key platforms like Silver Vendor and Customer Portals, significantly reducing incident resolution time through proactive improvements.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-black mb-12 section-heading font-display"><span class="text-secondary text-2xl mr-2 font-light">02.</span> Selected Projects</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            
+            <!-- Project 1 -->
+            <div class="glass-card p-8 rounded-none hover-trigger relative group flex flex-col">
+                <div class="flex justify-between items-center mb-8">
+                    <i class="far fa-folder text-4xl text-black"></i>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-black hover:text-gray-600 transition-colors"><i class="fas fa-external-link-alt text-xl"></i></a>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-black mb-3 group-hover:underline decoration-2 underline-offset-4">Customer Portal</h3>
+                <p class="text-gray-800 text-sm mb-6 leading-relaxed flex-grow font-medium">
+                    A comprehensive .NET MVC portal integrated with SAP for real-time data sync. Implemented secure role-based access control and streamlined Business Partner creation.
+                </p>
+                <div class="pt-4 border-t-2 border-gray-100">
+                    <ul class="text-xs font-bold font-mono text-black flex flex-wrap gap-3">
+                        <li>ASP.NET MVC</li>
+                        <li>PostgreSQL</li>
+                        <li>SAP Hana</li>
+                        <li>JS</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="glass-card p-8 rounded-none hover-trigger relative group flex flex-col">
+                <div class="flex justify-between items-center mb-8">
+                    <i class="far fa-folder text-4xl text-black"></i>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-black hover:text-gray-600 transition-colors"><i class="fas fa-external-link-alt text-xl"></i></a>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-black mb-3 group-hover:underline decoration-2 underline-offset-4">Vendor Portal</h3>
+                <p class="text-gray-800 text-sm mb-6 leading-relaxed flex-grow font-medium">
+                    Enabling vendors to manage quotations, orders, agreements, and invoices. Integrated seamlessly with SAP for transaction processing and backend synchronization.
+                </p>
+                <div class="pt-4 border-t-2 border-gray-100">
+                    <ul class="text-xs font-bold font-mono text-black flex flex-wrap gap-3">
+                        <li>ASP.NET MVC</li>
+                        <li>PostgreSQL</li>
+                        <li>SAP Hana</li>
+                        <li>API</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="glass-card p-8 rounded-none hover-trigger relative group flex flex-col">
+                <div class="flex justify-between items-center mb-8">
+                    <i class="fas fa-mobile-alt text-4xl text-black"></i>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-black hover:text-gray-600 transition-colors"><i class="fab fa-github text-xl"></i></a>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-black mb-3 group-hover:underline decoration-2 underline-offset-4">SH Mart App</h3>
+                <p class="text-gray-800 text-sm mb-6 leading-relaxed flex-grow font-medium">
+                    A Flutter-based staff utility app for item lookup, barcode generation, and PO creation. Features English/Gujarati localization and role-based authorization.
+                </p>
+                <div class="pt-4 border-t-2 border-gray-100">
+                    <ul class="text-xs font-bold font-mono text-black flex flex-wrap gap-3">
+                        <li>Flutter</li>
+                        <li>GetX</li>
+                        <li>Dio</li>
+                        <li>Material UI</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 container mx-auto px-6 max-w-6xl">
+        <h2 class="text-3xl md:text-4xl font-bold text-black mb-16 section-heading font-display"><span class="text-secondary text-2xl mr-2 font-light">03.</span> Technical Skills</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <!-- Left Col -->
+            <div class="skill-group">
+                <h3 class="text-xl text-black font-bold mb-8 border-b border-gray-200 pb-2">Languages & Frameworks</h3>
+                <div class="grid grid-cols-4 sm:grid-cols-5 gap-6 text-center">
+                    <!-- Flutter -->
+                    <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <i class="devicon-flutter-plain colored text-4xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-xs font-mono text-secondary">Flutter</span>
+                    </div>
+                    <!-- ASP.NET Core (Using .NET icon) -->
+                    <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <i class="devicon-dotnetcore-plain colored text-4xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-xs font-mono text-secondary">ASP.NET</span>
+                    </div>
+                    <!-- C# -->
+                    <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <i class="devicon-csharp-plain colored text-4xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-xs font-mono text-secondary">C#</span>
+                    </div>
+                    <!-- Javascript -->
+                    <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <i class="devicon-javascript-plain colored text-4xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-xs font-mono text-secondary">JS</span>
+                    </div>
+                    <!-- Dart -->
+                    <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <i class="devicon-dart-plain colored text-4xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-xs font-mono text-secondary">Dart</span>
+                    </div>
+                    <!-- HTML -->
+                    <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <i class="devicon-html5-plain colored text-4xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-xs font-mono text-secondary">HTML</span>
+                    </div>
+                    <!-- CSS -->
+                    <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <i class="devicon-css3-plain colored text-4xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-xs font-mono text-secondary">CSS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Col -->
+            <div class="skill-group">
+                <h3 class="text-xl text-black font-bold mb-8 border-b border-gray-200 pb-2">Databases & Tools</h3>
+                <div class="grid grid-cols-4 sm:grid-cols-5 gap-6 text-center">
+                    <!-- MySQL -->
+                    <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <i class="devicon-mysql-plain colored text-4xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-xs font-mono text-secondary">MySQL</span>
+                    </div>
+                    <!-- PostgreSQL -->
+                    <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <i class="devicon-postgresql-plain colored text-4xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-xs font-mono text-secondary">Postgres</span>
+                    </div>
+                    <!-- SQLite -->
+                    <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <i class="devicon-sqlite-plain colored text-4xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-xs font-mono text-secondary">SQLite</span>
+                    </div>
+                    <!-- Git -->
+                    <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <i class="devicon-git-plain colored text-4xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-xs font-mono text-secondary">Git</span>
+                    </div>
+                    <!-- VS Code -->
+                    <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <i class="devicon-vscode-plain colored text-4xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-xs font-mono text-secondary">VS Code</span>
+                    </div>
+                    <!-- Postman -->
+                    <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <i class="devicon-postman-plain colored text-4xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-xs font-mono text-secondary">Postman</span>
+                    </div>
+                     <!-- SAP (Generic DB Icon fallback) -->
+                     <div class="skill-icon flex flex-col items-center gap-2 group">
+                        <div class="w-9 h-9 flex items-center justify-center bg-blue-100 rounded text-blue-800">
+                            <i class="fas fa-database text-xl"></i>
+                        </div>
+                        <span class="text-xs font-mono text-secondary">SAP HANA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 container mx-auto px-6 text-center max-w-2xl">
+        <p class="text-black font-mono mb-4 contact-reveal font-bold">04. What's Next?</p>
+        <h2 class="text-5xl md:text-6xl font-bold text-black mb-6 contact-reveal font-display">Get In Touch</h2>
+        <p class="text-lg text-secondary mb-12 contact-reveal">
+            I'm currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+        </p>
+        <a href="mailto:adarsh.patel@example.com" class="contact-reveal px-10 py-4 bg-white border-2 border-black text-black font-bold font-display hover:bg-black hover:text-white transition-all inline-block shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] contact-btn">
+            Say Hello
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-xs font-mono text-secondary hover:text-black transition-colors cursor-pointer border-t border-gray-100">
+        <p>Designed & Built by Adarsh Patel</p>
+        <div class="mt-4 space-x-6 text-xl">
+            <a href="https://github.com/Adarsh2002014" target="_blank" class="text-secondary hover:text-black hover:-translate-y-1 transition-all inline-block"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/adarsh-patel-487895283?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="text-secondary hover:text-blue-600 hover:-translate-y-1 transition-all inline-block"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/adarshpatel_14?igsh=aHU5ZW5pbG05OThp" target="_blank" class="text-secondary hover:text-pink-600 hover:-translate-y-1 transition-all inline-block"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <!-- Floating Theme Toggle Button (New Position) -->
+    <button id="theme-toggle-fixed" class="theme-toggle-btn fixed bottom-8 right-8 z-50 w-14 h-14 rounded-full flex items-center justify-center focus:outline-none" aria-label="Toggle Dark Mode">
+        <i class="fas fa-moon text-xl"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- Mobile Menu Logic ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- Theme Toggle Logic ---
+        // Updated to target the single fixed button
+        const themeButton = document.getElementById('theme-toggle-fixed');
+        const body = document.body;
+        
+        // Check LocalStorage
+        if (localStorage.getItem('theme') === 'dark') {
+            enableDarkMode();
+        }
+
+        function enableDarkMode() {
+            body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+            updateIcon(true);
+        }
+
+        function disableDarkMode() {
+            body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+            updateIcon(false);
+        }
+
+        function updateIcon(isDark) {
+            const icon = themeButton.querySelector('i');
+            if (isDark) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                // Color is handled by CSS variable --toggle-icon
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        themeButton.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+
+        // --- Custom Cursor Logic ---
+        const cursorDot = document.querySelector(".cursor-dot");
+        const cursorOutline = document.querySelector(".cursor-outline");
+
+        window.addEventListener("mousemove", (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot follows instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Outline follows with slight delay via GSAP
+            gsap.to(cursorOutline, {
+                x: posX,
+                y: posY,
+                duration: 0.15,
+                ease: "power2.out"
+            });
+        });
+
+        // Cursor Hover Effects
+        const navLinks = document.querySelectorAll('a, button, .glass-card, .skill-icon');
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                gsap.to(cursorOutline, {
+                    scale: 1.5,
+                    backgroundColor: body.classList.contains('dark-mode') ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.05)",
+                    borderColor: body.classList.contains('dark-mode') ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)",
+                    duration: 0.1
+                });
+            });
+            link.addEventListener('mouseleave', () => {
+                gsap.to(cursorOutline, {
+                    scale: 1,
+                    backgroundColor: "transparent",
+                    borderColor: body.classList.contains('dark-mode') ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.5)",
+                    duration: 0.1
+                });
+            });
+        });
+
+        // --- GSAP Animations ---
+
+        // 1. Navbar Entry
+        gsap.from("#navbar", {
+            y: -100,
+            opacity: 0,
+            duration: 1,
+            ease: "power4.out",
+            delay: 0.5
+        });
+
+        // 2. Hero Section Stagger
+        gsap.from(".hero-el", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.1,
+            ease: "power3.out",
+            delay: 1
+        });
+
+        // 3. Experience Section Slide In
+        gsap.from(".experience-trigger", {
+            scrollTrigger: {
+                trigger: "#about",
+                start: "top 80%",
+            },
+            x: -50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        gsap.from(".experience-content", {
+            scrollTrigger: {
+                trigger: "#about",
+                start: "top 80%",
+            },
+            x: 50,
+            opacity: 0,
+            duration: 1,
+            delay: 0.2,
+            ease: "power3.out"
+        });
+
+        // 4. Project Cards Animation (FIXED: Triggers individually to prevent invisible cards)
+        gsap.utils.toArray(".glass-card").forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 95%", // Triggers almost immediately when card enters viewport
+                    toggleActions: "play none none reverse" // Replays if you scroll back up
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                ease: "back.out(1.7)",
+                clearProps: "all" // Clean up after animation to prevent CSS conflicts
+            });
+        });
+
+        // 5. Skills Fade In
+        gsap.from(".skill-group", {
+            scrollTrigger: {
+                trigger: "#skills",
+                start: "top 85%", // Slightly earlier trigger
+            },
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+
+        // 6. Contact Section
+        gsap.from(".contact-reveal", {
+            scrollTrigger: {
+                trigger: "#contact",
+                start: "top 70%",
+            },
+            scale: 0.9,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power2.out"
+        });
+
+        // 7. Section Headings (Generic)
+        gsap.utils.toArray('.section-heading').forEach(heading => {
+            gsap.from(heading, {
+                scrollTrigger: {
+                    trigger: heading,
+                    start: "top 85%",
+                },
+                x: -30,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+        });
+
+    </script>
+</body>
+</html>
